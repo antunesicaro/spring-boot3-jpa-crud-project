@@ -3,12 +3,28 @@ package com.antunesicaro.springboot.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 //para o objeto trafegar na rede é preciso transformar em cadeia de bytes com serializable
+//anotation do jpa pra instruir pro jpa como ele vai converter objetos para modelo relacional
+//uso tb a anotation table pra mudar o nome pra tb_user, pois User é reservado do h2
+
+@Entity
+@Table(name = "tb_user")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	//1-nomear atributos
 	//2-relacionamentos, porém por ser a primeira entidade, não faz ainda.
+	//anotation id pra dizer pro jpa quem é a a chave primária
+	//como a chave é numérica, vai ser autoincremento no banco de dados, pra dizer isso basta usar a generatedvalue
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private String email;
